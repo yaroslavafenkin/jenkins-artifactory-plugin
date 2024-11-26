@@ -509,6 +509,12 @@ document.addEventListener("DOMContentLoaded", () => {
             initTextAndSelectOnLoad(labelId, 'none', '');
         }
     });
+
+    document.querySelectorAll(".artifactory-staging-params-select").forEach((element) => {
+        element.addEventListener("change", (event) => {
+            setStagingParamsSelectedValue(event.target);
+        });
+    });
 });
 
 Behaviour.specify("BUTTON.artifactory-toggle-txt-and-select", "dynamicRepos_artifactory-toggle-txt-and-select", 0, (element) => {
