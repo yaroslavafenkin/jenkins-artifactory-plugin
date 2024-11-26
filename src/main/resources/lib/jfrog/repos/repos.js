@@ -480,9 +480,9 @@ function initTextAndSelectOnLoad(label, txtValue, selectValue) {
         if (button != undefined) {
             if (txtValue === '') {
                 // noinspection SqlNoDataSourceInspection,SqlResolve
-                button.value = "Select from List";
+                button.innerText = "Select from List";
             } else {
-                button.value = "Different Value";
+                button.innerText = "Different Value";
             }
         }
     }
@@ -497,3 +497,24 @@ function initTextAndSelectOnLoad(label, txtValue, selectValue) {
 function getElementByUniqueId(elementId, uniqueId) {
     return document.getElementById(elementId + "-" + uniqueId)
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".artifactory-text-select-init-data-holder").forEach((dataHolder) => {
+        const { labelId } = dataHolder.dataset;
+        const dynamicMode = dataHolder.dataset.dynamicMode === "true";
+
+        if (dynamicMode) {
+            initTextAndSelectOnLoad(labelId, '', 'none');
+        } else {
+            initTextAndSelectOnLoad(labelId, 'none', '');
+        }
+    });
+});
+
+Behaviour.specify("BUTTON.artifactory-toggle-txt-and-select", "dynamicRepos_artifactory-toggle-txt-and-select", 0, (element) => {
+    element.addEventListener("click", (event) => {
+        const { txtId } = event.target.dataset;
+
+        toggleTxtAndSelect(txtId, `mode_${txtId}`);
+    });
+});
