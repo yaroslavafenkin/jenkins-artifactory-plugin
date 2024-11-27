@@ -510,12 +510,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    document.querySelectorAll(".artifactory-staging-params-select").forEach((element) => {
-        element.addEventListener("change", (event) => {
-            setStagingParamsSelectedValue(event.target);
-        });
-    });
-
     document.querySelectorAll(".artifactory-refresh-repos-button").forEach((button) => {
         button.addEventListener("click", (event) => {
             const target = event.target;
@@ -531,5 +525,11 @@ Behaviour.specify("BUTTON.artifactory-toggle-txt-and-select", "dynamicRepos_arti
         const { txtId } = event.target.dataset;
 
         toggleTxtAndSelect(txtId, `mode_${txtId}`);
+    });
+});
+
+Behaviour.specify("SELECT.artifactory-staging-params-select", "artifactory-select-staging-params", 0, (element) => {
+    element.addEventListener("change", (event) => {
+        setStagingParamsSelectedValue(event.target);
     });
 });
