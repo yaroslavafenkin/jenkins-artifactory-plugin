@@ -515,6 +515,15 @@ document.addEventListener("DOMContentLoaded", () => {
             setStagingParamsSelectedValue(event.target);
         });
     });
+
+    document.querySelectorAll(".artifactory-refresh-repos-button").forEach((button) => {
+        button.addEventListener("click", (event) => {
+            const target = event.target;
+            const { jsFunction, uniqueId, repoUrl, credentialsDescriber, staplerProxyName } = target.dataset;
+
+            repos(target, jsFunction, uniqueId, repoUrl, credentialsDescriber, window[staplerProxyName]);
+        });
+    });
 });
 
 Behaviour.specify("BUTTON.artifactory-toggle-txt-and-select", "dynamicRepos_artifactory-toggle-txt-and-select", 0, (element) => {
